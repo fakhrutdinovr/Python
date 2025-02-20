@@ -10,7 +10,6 @@ load_dotenv()
 
 API_TOKEN = os.getenv("API_TOKEN")
 API_URL = os.getenv("API_URL")
-DB_URL =
 
 
 async def main():
