@@ -10,13 +10,13 @@ load_dotenv()
 
 API_TOKEN = os.getenv("API_TOKEN")
 API_URL = os.getenv("API_URL")
-DB_URL = os.getenv("DB_URL")
+DB_URL =
 
 
 async def main():
     try:
         # Инициализация базы данных
-        db = Database(DB_URL)
+        db = Database(os.getenv("DB_URL"))
         await db.delete_tables()
         await db.init_db()
 
