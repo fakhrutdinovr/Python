@@ -1,8 +1,9 @@
 import asyncio
-from models.ModelStocks import ModelStocks
+from models.Models import ModelStocks
 from schemes.Database import Database
 from repositories.ProductRepository import ProductRepository
 from data.ApiClient import ApiClient
+from schemes.TableStocks import TableStocks
 from dotenv import load_dotenv
 import os
 
@@ -29,11 +30,11 @@ async def main():
         client = ApiClient(API_TOKEN, API_URL)
 
         # Выполняем запрос к API
-        data = client.getData("stocks", {"dateFrom": "2019-01-01"})
+        data_stocks = client.getData("stocks", {"dateFrom": "2019-01-01"})
 
         # Вставляем данные в таблицу
-        products = [ModelStocks(**item) for item in data]
-        await repo.insert_many_products(products)
+        products = [ModelStocks(**item) for item in data_stocks]
+        await repo.insert_many_products(products, TableStocks)
 
         print("Данные успешно загружены в базу данных.")
     except Exception as e:
@@ -42,3 +43,4 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
+

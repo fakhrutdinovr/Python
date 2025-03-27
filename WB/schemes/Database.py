@@ -1,6 +1,6 @@
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import sessionmaker
-from schemes.TableBase import TableBase
+from schemes.Tables import Base
 
 
 class Database:
@@ -13,12 +13,12 @@ class Database:
     async def init_db(self):
         """Создает таблицы в базе данных."""
         async with self.engine.begin() as conn:
-            await conn.run_sync(TableBase.metadata.create_all)
+            await conn.run_sync(Base.metadata.create_all)
 
     async def delete_tables(self):
         """Очищает таблицы в базе данных."""
         async with self.engine.begin() as conn:
-            await conn.run_sync(TableBase.metadata.drop_all)
+            await conn.run_sync(Base.metadata.drop_all)
 
     async def get_session(self) -> AsyncSession:
         """Возвращает асинхронную сессию."""

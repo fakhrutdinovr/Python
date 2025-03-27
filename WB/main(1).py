@@ -1,15 +1,17 @@
-from Anvarov_ip.WB.data.ApiClient import ApiClient
+from data.ApiClient import ApiClient
 import json
-from config import token, url
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
 # Пример использования
 if __name__ == "__main__":
 
     # Создаем экземпляр класса
-    client = ApiClient(token, url)
+    client = ApiClient(os.getenv("API_TOKEN"), os.getenv("API_URL"))
 
     # Выполняем запрос к API
-    data = client.getData("stocks", {"dateFrom": "2019-01-01"})
+    data = client.getJSON("orders", {"dateFrom": "2024-01-01"})
 
 
     if data:
